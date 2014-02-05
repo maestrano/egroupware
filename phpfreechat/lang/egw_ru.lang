@@ -1,0 +1,6 @@
+egroupware chat	phpfreechat	ru	Чат EGroupware
+phpfreechat	common	ru	Чат
+phpfreechat integration into egroupware	phpfreechat	ru	Интеграция чата в EGroupware
+the chat opens in a new window.	phpfreechat	ru	Чат открывается в новом окне
+to complete the phpfreechat installation you have to give the webserver write access to:	phpfreechat	ru	Для выполнения установки чата необходимо предоставить Web-серверу права на запись данных
+you should remove the write access, once you see the chat!	phpfreechat	ru	Если страница чата отображается, права записи следует удалить

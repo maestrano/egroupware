@@ -1,0 +1,21 @@
+after successful installation of all instances, you have to copy %1 to %2!	gallery	pl	Po zakończeniu instalacji wszystkich instancji, musisz skopiować %1 do %2!
+album frame (%1samples%2)	gallery	pl	Ramka albumu (%1Samples%2)
+alignment of the block	gallery	pl	Wyrównanie bloku
+all filenames are relative to %1.	gallery	pl	Wszystkie nazwy plików są względne do %1.
+all other egroupware users will be created by the g2 integration including there admin rights.	gallery	pl	Wszyscy inni użytkownicy eGW zostaną stworzeni w galerii przez integrator G2 włącznie z ich prawami do zarządzania.
+an error occurred during user creation in g2.	gallery	pl	Zaistniał błąd podczas tworzenia użytkowników w G2.
+an error occurred while trying to initialize g2.	gallery	pl	Zaistniał błąd podczas próby inicjalizacji w G2.
+can be used to limit the block to a certain album.	gallery	pl	Może zostać wykożystane do ograniczenia bloku do niektórych albumów.
+center	gallery	pl	Wyśrodkowany
+complete gallery	gallery	pl	Cała galeria.
+default item to show in the gallery.	gallery	pl	Domyślna pozycja, którą mam pokazać w Gallery.
+extra information to show	gallery	pl	Dodatkowe informacje do pokazania
+full size	gallery	pl	Pełny rozmiar
+gallery	common	pl	Galeria
+gallery menu	gallery	pl	Galeria - menu
+gallery sidebar	gallery	pl	Galeria - menu boczne
+gallery2 is not installed, you need to %1do that%2 first!!!	gallery	pl	Moduł Gallery2 NIE jest zainstalowany, należy %1zrobić to%2 w pierwszej kolejności.
+please note:	gallery	pl	Proszę zauważyć:
+use this module to display the embeded gallery	gallery	pl	Użyj tego modułu w celu wyświetlenia wbudowanej galerii
+view count	gallery	pl	Pokaż licznik
+you have no rights to view %1 content !!!	gallery	pl	Nie masz uprawnień do oglądania zawartości %1!

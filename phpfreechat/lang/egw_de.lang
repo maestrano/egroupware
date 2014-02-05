@@ -1,0 +1,6 @@
+egroupware chat	phpfreechat	de	EGroupware Chat
+phpfreechat	common	de	freeChat
+phpfreechat integration into egroupware	phpfreechat	de	phpFreeChat-Integration für EGroupware
+the chat opens in a new window.	phpfreechat	de	Der Chat öffnet sich in einem neuen Fenster.
+to complete the phpfreechat installation you have to give the webserver write access to:	phpfreechat	de	Um die Installation für phpFreeChat abzuschließen, müssen Sie dem Webserver für kurze Zeit Schreibrechte geben.
+you should remove the write access, once you see the chat!	phpfreechat	de	Sie sollten den Schreibzugriff wieder entfernen, nachdem Sie sich zu ersten mal eingeloggt haben und Sie das Chat Modul sehen können.
