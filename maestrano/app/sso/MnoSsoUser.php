@@ -41,8 +41,8 @@ class MnoSsoUser extends MnoSsoBaseUser
   {
     $login = $this->uid;
     $login .= '@'.$GLOBALS['egw_info']['server']['default_domain'];
-    //echo $login;
     $GLOBALS['sessionid'] = $GLOBALS['egw']->session->create($login,'','text',false,false);
+    return true;
   }
   
   

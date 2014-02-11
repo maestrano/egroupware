@@ -29,6 +29,20 @@ if(file_exists('../header.inc.php'))
 {
 	include('../header.inc.php');
 }
+
+// Hook:Maestrano
+// Check Maestrano session is valid (internal admin page)
+// Setup page will still require a password but at least
+// external users cannot access it
+egw_session::init_handler();
+require '../maestrano/app/init/base.php';
+$maestrano = MaestranoService::getInstance();
+if ($maestrano->isSsoEnabled()) {
+  if (!$maestrano->getSsoSession()->isValid()) {
+    header("Location: " . $maestrano->getSsoInitUrl());
+  }
+}
+
 // for an old header we need to setup a reference for the domains
 if (!is_array($GLOBALS['egw_domain'])) $GLOBALS['egw_domain'] =& $GLOBALS['phpgw_domain'];
 

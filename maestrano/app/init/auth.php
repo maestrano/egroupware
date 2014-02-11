@@ -35,5 +35,3 @@ include APP_DIR . '/phpgwapi/inc/functions.inc.php';
 
 $opts = array();
 $opts['db_connection'] = $GLOBALS['egw']->db;
-
-
