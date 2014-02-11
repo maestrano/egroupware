@@ -43,27 +43,6 @@ class MnoSsoUser extends MnoSsoBaseUser
     $login .= '@'.$GLOBALS['egw_info']['server']['default_domain'];
     //echo $login;
     $GLOBALS['sessionid'] = $GLOBALS['egw']->session->create($login,'','text',false,false);
-    //var_dump($GLOBALS['sessionid']);
-    // // First set $conn variable (need global variable?)
-    // $conn = $this->connection;
-    // 
-    // $sel1 = $conn->query("SELECT ID,name,lastlogin FROM user WHERE ID = $this->local_id");
-    // $chk = $sel1->fetch();
-    // if ($chk["ID"] != "") {
-    //     $now = time();
-    //     
-    //     // Set session
-    //     $this->session['userid'] = $chk['ID'];
-    //     $this->session['username'] = stripslashes($chk['name']);
-    //     $this->session['lastlogin'] = $now;
-    //     
-    //     // Update last login timestamp
-    //     $upd1 = $conn->query("UPDATE user SET lastlogin = '$now' WHERE ID = $this->local_id");
-    //     
-    //     return true;
-    // } else {
-    //     return false;
-    // }
   }
   
   
