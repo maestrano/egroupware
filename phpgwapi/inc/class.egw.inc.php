@@ -285,6 +285,11 @@ class egw extends egw_minimal
 	 */
 	function verify_session()
 	{
+    // Hook:Maestrano
+    // Get Maestrano service
+    require_once EGW_SERVER_ROOT . '/maestrano/app/init/base.php';
+    $maestrano = MaestranoService::getInstance();
+    
 		if(isset($GLOBALS['egw_info']['server']['enforce_ssl']) && !$_SERVER['HTTPS'])
 		{
 			Header('Location: https://' . $GLOBALS['egw_info']['server']['hostname'] . $GLOBALS['egw_info']['server']['webserver_url'] . $_SERVER['REQUEST_URI']);
@@ -300,36 +305,51 @@ class egw extends egw_minimal
 		}
 		if (!$sessionid)
 		{
-			//echo "<p>account_callback='$account_callback', account=".print_r($account,true).", sessionid=$sessionid</p>\n"; exit;
-			// we forward to the same place after the re-login
-			if ($GLOBALS['egw_info']['server']['webserver_url'] && $GLOBALS['egw_info']['server']['webserver_url'] != '/' &&
-				($webserver_path = parse_url($GLOBALS['egw_info']['server']['webserver_url'],PHP_URL_PATH)) && $webserver_path != '/')
-			{
-				// we have to use only path component, to cope with domains like http://egroupware.domain.com and /egroupware
-				list(,$relpath) = explode($webserver_path,parse_url($_SERVER['PHP_SELF'],PHP_URL_PATH),2);
-			}
-			else	// the webserver-url is empty or just a slash '/' (eGW is installed in the docroot and no domain given)
-			{
-				if (preg_match('/^https?:\/\/[^\/]*\/(.*)$/',$relpath=$_SERVER['PHP_SELF'],$matches))
-				{
-					$relpath = $matches[1];
-				}
-			}
-			// this removes the sessiondata if its saved in the URL
-			$query = preg_replace('/[&]?sessionid(=|%3D)[^&]+&kp3(=|%3D)[^&]+&domain=.*$/','',$_SERVER['QUERY_STRING']);
-			if ($GLOBALS['egw_info']['server']['http_auth_types'])
-			{
-				$redirect = '/phpgwapi/ntlm/index.php?';
-			}
-			else
-			{
-				$redirect = '/login.php?';
-				// only add "your session could not be verified", if a sessionid is given (cookie or on url)
-				if (egw_session::get_sessionid()) $redirect .= 'cd=10&';
-			}
-			if ($relpath) $redirect .= 'phpgw_forward='.urlencode($relpath.(!empty($query) ? '?'.$query : ''));
-			Header('Location: '.$GLOBALS['egw_info']['server']['webserver_url'].$redirect);
-			exit;
+      // Hook:Maestrano
+      // Redirect to SSO login
+      if ($maestrano->isSsoEnabled()) {
+        header("Location: " . $maestrano->getSsoInitUrl());
+      } else {
+  			//echo "<p>account_callback='$account_callback', account=".print_r($account,true).", sessionid=$sessionid</p>\n"; exit;
+  			// we forward to the same place after the re-login
+  			if ($GLOBALS['egw_info']['server']['webserver_url'] && $GLOBALS['egw_info']['server']['webserver_url'] != '/' &&
+  				($webserver_path = parse_url($GLOBALS['egw_info']['server']['webserver_url'],PHP_URL_PATH)) && $webserver_path != '/')
+  			{
+  				// we have to use only path component, to cope with domains like http://egroupware.domain.com and /egroupware
+  				list(,$relpath) = explode($webserver_path,parse_url($_SERVER['PHP_SELF'],PHP_URL_PATH),2);
+  			}
+  			else	// the webserver-url is empty or just a slash '/' (eGW is installed in the docroot and no domain given)
+  			{
+  				if (preg_match('/^https?:\/\/[^\/]*\/(.*)$/',$relpath=$_SERVER['PHP_SELF'],$matches))
+  				{
+  					$relpath = $matches[1];
+  				}
+  			}
+  			// this removes the sessiondata if its saved in the URL
+  			$query = preg_replace('/[&]?sessionid(=|%3D)[^&]+&kp3(=|%3D)[^&]+&domain=.*$/','',$_SERVER['QUERY_STRING']);
+  			if ($GLOBALS['egw_info']['server']['http_auth_types'])
+  			{
+  				$redirect = '/phpgwapi/ntlm/index.php?';
+  			}
+  			else
+  			{
+  				$redirect = '/login.php?';
+  				// only add "your session could not be verified", if a sessionid is given (cookie or on url)
+  				if (egw_session::get_sessionid()) $redirect .= 'cd=10&';
+  			}
+  			if ($relpath) $redirect .= 'phpgw_forward='.urlencode($relpath.(!empty($query) ? '?'.$query : ''));
+  			Header('Location: '.$GLOBALS['egw_info']['server']['webserver_url'].$redirect);
+  			exit;
+      }
+			
+		} else {
+      // Hook:Maestrano
+      // Check Maestrano session is still valid
+      if ($maestrano->isSsoEnabled()) {
+        if (!$maestrano->getSsoSession()->isValid()) {
+          header("Location: " . $maestrano->getSsoInitUrl());
+        }
+      }
 		}
 	}
 
