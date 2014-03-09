@@ -89,7 +89,7 @@ class MnoSsoUser extends MnoSsoBaseUser
     'etemplate' => 1,
     'filemanager' => 1,
     'phpfreechat' => 1,
-    'gallery' => 1,
+    'gallery' => 0,
     'importexport' => 1,
     'infolog' => 1,
     'phpbrain' => 1,
