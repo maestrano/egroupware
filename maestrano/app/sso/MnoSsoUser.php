@@ -125,7 +125,7 @@ class MnoSsoUser extends MnoSsoBaseUser
 			'account_id'            => 0,
 			'account_primary_group' => $this->getRoleIdToAssign(),
 			'account_passwd_2'      => $password,
-			'account_groups'        => '',
+			'account_groups'        => $this->getOtherGroupsToAssign(),
 			'anonymous'             => 0,
 			'changepassword'        => '1',
 			'account_permissions'   => $permissions,
@@ -163,6 +163,19 @@ class MnoSsoUser extends MnoSsoBaseUser
     }
     
     return $role_id;
+  }
+  
+  /**
+   * Return the other groups the user should be assigned to
+   *
+   * @return the ID of the user created, null otherwise
+   */
+  public function getOtherGroupsToAssign() {
+    if ($this->getRoleIdToAssign() == -2) {
+      return Array(-1,-2);
+    } else {
+      return Array(-1);
+    }
   }
   
   /**
