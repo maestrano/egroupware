@@ -546,7 +546,7 @@ class addressbook_so
 	 * @param int|string $contact_id contact_id or 'a'.account_id
 	 * @return array|boolean data if row could be retrived else False
 	*/
-	function read($contact_id)
+	function read($contact_id,$bypass_acl=false)
 	{
 		if (!is_array($contact_id) && substr($contact_id,0,8) == 'account:')
 		{

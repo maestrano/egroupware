@@ -34,10 +34,12 @@ if(file_exists('../header.inc.php'))
 // Check Maestrano session is valid (internal admin page)
 // Setup page will still require a password but at least
 // external users cannot access it
-egw_session::init_handler();
+//egw_session::init_handler();
 require '../maestrano/app/init/base.php';
+
 $maestrano = MaestranoService::getInstance();
 if ($maestrano->isSsoEnabled()) {
+    egw_session::init_handler();
   if (!$maestrano->getSsoSession()->isValid()) {
     header("Location: " . $maestrano->getSsoInitUrl());
   }

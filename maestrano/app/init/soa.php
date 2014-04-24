@@ -25,6 +25,7 @@ include_once APP_DIR . '/header.inc.php';
 require_once APP_DIR . '/admin/inc/class.soaccounts.inc.php';
 include_once APP_DIR . '/phpgwapi/inc/functions.inc.php';
 
+
 //-----------------------------------------------
 // Perform your custom preparation code
 //-----------------------------------------------
