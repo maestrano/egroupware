@@ -21,13 +21,13 @@ if (defined('EGW_JPGRAPH_PATH'))
 		die('EGW_JPGRAPH_PATH="'.EGW_JPGRAPH_PATH.'" defined but not valid!');
 	}
 }
-elseif(file_exists(EGW_SERVER_ROOT . '/../jpgraph/src/jpgraph.php'))
+elseif(file_exists(EGW_SERVER_ROOT . '/jpgraph/src/jpgraph.php'))
 {
-	define('EGW_JPGRAPH_PATH',realpath(EGW_SERVER_ROOT . '/../jpgraph/src'));
+	define('EGW_JPGRAPH_PATH',realpath(EGW_SERVER_ROOT . '/jpgraph/src'));
 }
-elseif (file_exists(EGW_SERVER_ROOT . '/../jpgraph/jpgraph.php'))
+elseif (file_exists(EGW_SERVER_ROOT . '/jpgraph/jpgraph.php'))
 {
-	define('EGW_JPGRAPH_PATH',realpath(EGW_SERVER_ROOT . '/../jpgraph'));
+	define('EGW_JPGRAPH_PATH',realpath(EGW_SERVER_ROOT . '/jpgraph'));
 }
 // check if the admin installed a recent JPGraph parallel to eGroupWare
 if (defined('EGW_JPGRAPH_PATH'))

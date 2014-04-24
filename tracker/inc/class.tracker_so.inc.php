@@ -233,8 +233,10 @@ class tracker_so extends so_sql_cf
 		}
 		if ($need_private_acl)
 		{
-			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user.','.
-				implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true)).'))';
+      $membership_list = implode(',',$GLOBALS['egw']->accounts->memberships($this->user,true));
+      if (!empty($membership_list)) $membership_list = ',' . $membership_list;
+        
+			$filter[] = '(tr_private=0 OR tr_creator='.$this->user.' OR tr_assigned IN ('.$this->user . $membership_list.'))';
 		}
 		if (is_string($criteria) && $criteria)
 		{

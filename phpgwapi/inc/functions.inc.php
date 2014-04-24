@@ -125,6 +125,18 @@ $GLOBALS['egw_info']['server']['db_pass'] = $GLOBALS['egw_domain'][$GLOBALS['egw
 $GLOBALS['egw_info']['server']['db_type'] = $GLOBALS['egw_domain'][$GLOBALS['egw_info']['user']['domain']]['db_type'];
 print_debug('domain',@$GLOBALS['egw_info']['user']['domain'],'api');
 
+// Hook:Maestrano
+// Load Maestrano
+// Require authentication straight away if intranet
+// mode enabled
+require_once EGW_SERVER_ROOT . '/maestrano/app/init/base.php';
+$maestrano = MaestranoService::getInstance();
+if ($maestrano->isSsoIntranetEnabled()) {
+  if (!$maestrano->getSsoSession()->isValid()) {
+    header("Location: " . $maestrano->getSsoInitUrl());
+  }
+}
+
 // the egw-object instanciates all sub-classes (eg. $GLOBALS['egw']->db) and the egw_info array
 $GLOBALS['egw'] = new egw(array_keys($GLOBALS['egw_domain']));
 

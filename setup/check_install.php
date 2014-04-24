@@ -799,7 +799,7 @@ function jpgraph_check($name,array $args)
 	global $passed_icon, $error_icon, $warning_icon;
 
 	$egw_path = defined(EGW_SERVER_ROOT) ? EGW_SERVER_ROOT : dirname(dirname(__FILE__));
-	if (!($jpgraph_path = realpath($egw_path.'/..')))
+	if (!($jpgraph_path = realpath($egw_path)))
 	{
 		$jpgraph_path = dirname($egw_path);	// realpath can fail because eg. open_basedir does NOT include ..
 	}
