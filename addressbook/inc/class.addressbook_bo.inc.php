@@ -13,6 +13,12 @@
  * @version $Id: class.addressbook_bo.inc.php 43307 2013-08-02 19:31:59Z ralfbecker $
  */
 
+if (!defined('MAESTRANO_ROOT')) {
+  define("MAESTRANO_ROOT", realpath(dirname(__FILE__) . '/../../maestrano/'));
+}
+
+require_once MAESTRANO_ROOT . '/app/init/base.php';
+
 /**
  * General business object of the adressbook
  */
@@ -772,7 +778,23 @@ class addressbook_bo extends addressbook_so
 			{
 				break;
 			}
+                        
+            // MNO HOOK
+            if ($ok) {
+                // Get Maestrano Service
+                $maestrano = MaestranoService::getInstance();
+
+                // DISABLED DELETE NOTIFICATIONS
+                if ($maestrano->isSoaEnabled() and $maestrano->getSoaUrl()) {
+                    $mno_org=new MnoSoaOrganization($this->db, new MnoSoaBaseLogger());
+                    $mno_org->sendDeleteNotification($id);
+
+                    $mno_person=new MnoSoaPerson($this->db, new MnoSoaBaseLogger());
+                    $mno_person->sendDeleteNotification($id);
+                }
+            }
 		}
+		
 		//error_log(__METHOD__.'('.array2string($contact).', deny_account_delete='.array2string($deny_account_delete).', check_etag='.array2string($check_etag).' returning '.array2string($ok));
 		return $ok;
 	}
@@ -784,7 +806,7 @@ class addressbook_bo extends addressbook_so
 	* @param boolean $ignore_acl=false should the acl be checked or not
 	* @return int/string/boolean id on success, false on failure, the error-message is in $this->error
 	*/
-	function save(&$contact,$ignore_acl=false)
+	function save(&$contact,$ignore_acl=false,$push_to_maestrano=true)
 	{
 		// remember if we add or update a entry
 		if (($isUpdate = $contact['id']))
@@ -941,7 +963,18 @@ class addressbook_bo extends addressbook_so
 				$this->tracking->track($to_write, $old ? $old : null, null, $deleted);
 			}
 		}
+		
+        // MNO HOOK
+        if ($push_to_maestrano && !$this->error) {
+            // Get Maestrano Service
+            $maestrano = MaestranoService::getInstance();
 
+            if ($maestrano->isSoaEnabled() and $maestrano->getSoaUrl()) {	                 
+                $mno_org=new MnoSoaPerson($this->db, new MnoSoaBaseLogger());
+                $mno_org->send($contact);
+            }
+        }
+		
 		return $this->error ? false : $contact['id'];
 	}
 
@@ -996,13 +1029,13 @@ class addressbook_bo extends addressbook_so
 	* @param int|string $contact_id
 	* @return array|boolean array with contact data, null if not found or false on no view perms
 	*/
-	function read($contact_id)
+	function read($contact_id,$bypass_acl=false)
 	{
-		if (!($data = parent::read($contact_id)))
+		if (!($data = parent::read($contact_id, $bypass_acl)))
 		{
 			$data = null;	// not found
 		}
-		elseif (!$this->check_perms(EGW_ACL_READ,$data))
+		elseif (!bypass_acl && !$this->check_perms(EGW_ACL_READ,$data))
 		{
 			$data = false;	// no view perms
 		}
