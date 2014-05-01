@@ -63,6 +63,11 @@ if($GLOBALS['egw_info']['server']['auth_type'] == 'cas')
 	phpCAS::logout(array('url'=>$GLOBALS['egw_info']['server']['webserver_url'].'/login.php?cd=1&domain='.$GLOBALS['egw_info']['user']['domain']));
 }
 
+// Hook:Maestrano
+$maestrano = MaestranoService::getInstance();
+if ($maestrano->isSsoEnabled()) {
+  header("Location: " . $maestrano->getSsoLogoutUrl());
+}
 // $GLOBALS['egw']->redirect($redirectTarget);
 ?>
 <head>

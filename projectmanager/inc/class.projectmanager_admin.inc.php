@@ -198,20 +198,20 @@ class projectmanager_admin
 	 */
 	function get_font_file($font,$style)
 	{
-		if(file_exists(EGW_SERVER_ROOT . '/../jpgraph/src/jpg-config.inc.php'))
+		if(file_exists(EGW_SERVER_ROOT . '/jpgraph/src/jpg-config.inc.php'))
 		{
 			//echo "including jpg-config.inc.php";
-			require_once(EGW_SERVER_ROOT . '/../jpgraph/src/jpg-config.inc.php');
-			if(file_exists(EGW_SERVER_ROOT . '/../jpgraph/src/jpgraph_ttf.inc.php'))
+			require_once(EGW_SERVER_ROOT . '/jpgraph/src/jpg-config.inc.php');
+			if(file_exists(EGW_SERVER_ROOT . '/jpgraph/src/jpgraph_ttf.inc.php'))
 			{
 				//echo "including jpgraph_ttf.inc.php";
-				require_once(EGW_SERVER_ROOT . '/../jpgraph/src/jpgraph_ttf.inc.php');
+				require_once(EGW_SERVER_ROOT . '/jpgraph/src/jpgraph_ttf.inc.php');
 			}
 		}
-		elseif(file_exists(EGW_SERVER_ROOT . '/../jpgraph/src/jpg-config.inc'))
+		elseif(file_exists(EGW_SERVER_ROOT . '/jpgraph/src/jpg-config.inc'))
 		{
 			//echo "including jpg-config.inc";
-			require_once(EGW_SERVER_ROOT . '/../jpgraph/src/jpg-config.inc');
+			require_once(EGW_SERVER_ROOT . '/jpgraph/src/jpg-config.inc');
 		}
 		else
 		{
