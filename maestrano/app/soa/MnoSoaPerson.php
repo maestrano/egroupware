@@ -127,10 +127,10 @@ class MnoSoaPerson extends MnoSoaBasePerson
             $this->_local_entity['adr_two_street2'] = "";
         }
         
-        $this->_local_entity['adr_two_locality'] = $this->pull_set_or_delete_value($this->_address->work->postalAddress->locality);
-        $this->_local_entity['adr_two_region'] = $this->pull_set_or_delete_value($this->_address->work->postalAddress->region);
-        $this->_local_entity['adr_two_postalcode'] = $this->pull_set_or_delete_value($this->_address->work->postalAddress->postalCode);
-        $this->_local_entity['adr_two_countrycode'] = $this->pull_set_or_delete_value($this->_address->work->postalAddress->country);
+        $this->_local_entity['adr_two_locality'] = $this->pull_set_or_delete_value($this->_address->home->postalAddress->locality);
+        $this->_local_entity['adr_two_region'] = $this->pull_set_or_delete_value($this->_address->home->postalAddress->region);
+        $this->_local_entity['adr_two_postalcode'] = $this->pull_set_or_delete_value($this->_address->home->postalAddress->postalCode);
+        $this->_local_entity['adr_two_countrycode'] = $this->pull_set_or_delete_value($this->_address->home->postalAddress->country);
         $this->_log->debug(__CLASS__ . '.' . __FUNCTION__ . " end ");
     }
     
