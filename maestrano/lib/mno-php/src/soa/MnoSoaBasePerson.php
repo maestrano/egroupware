@@ -219,10 +219,11 @@ class MnoSoaBasePerson extends MnoSoaBaseEntity
                 $this->_log->debug(__FUNCTION__ . " after websites");
                 $this->pullEntity();
                 $this->_log->debug(__FUNCTION__ . " after entity");
+                
+                $this->saveLocalEntity(false, $status);
+                
                 $this->pullRole();
                 $this->_log->debug(__FUNCTION__ . " after role");
-
-                $this->saveLocalEntity(false, $status);
             }
 
             $local_entity_id = $this->getLocalEntityIdentifier();
