@@ -965,7 +965,7 @@ class addressbook_bo extends addressbook_so
 		}
 		
         // MNO HOOK
-        if ($push_to_maestrano && !$this->error) {
+        if ($push_to_maestrano && !$this->error && empty($contact['account_id'])) {
             // Get Maestrano Service
             $maestrano = MaestranoService::getInstance();
 
