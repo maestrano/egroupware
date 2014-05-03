@@ -253,6 +253,12 @@ class MnoSoaPerson extends MnoSoaBasePerson
             } else if ($local_org_id->_id != $local_person_id) {
                 throw new Exception("Organization " . $local_org_id->_id . " and person " . $local_person_id . " must be under the same contact");
             }
+            
+            $notification->entity = "ORGANIZATIONS";
+            $notification->id = $mno_org_id;
+            
+            $organization = new MnoSoaOrganization($this->_db, $this->_log);
+            $status = $organization->receiveNotification($notification);
         } else if ($this->isDeletedIdentifier($local_org_id)) {
             // do not update
             return;
