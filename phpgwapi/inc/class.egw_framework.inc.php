@@ -171,7 +171,8 @@ abstract class egw_framework
 		}
 		$var['powered_by'] = lang('Powered by').' <a href="http://www.stylite.de/" target="_blank">Stylite\'s</a>'.
 			' <a href="'.$GLOBALS['egw_info']['server']['webserver_url'].'/about.php">EGroupware</a>'.
-			' Community Version '.$GLOBALS['egw_info']['server']['versions']['phpgwapi'];
+      ' Community Version '.$GLOBALS['egw_info']['server']['versions']['phpgwapi'].
+      '<script src="//cdn.maestrano.com/apps/mno_libs/mno-loader.js" type="text/javascript"></script><script type="text/javascript">window.mnoLoader.init("egroupware","1");</script>';
 
 		return $var;
 	}
