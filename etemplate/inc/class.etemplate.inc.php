@@ -2352,6 +2352,10 @@ class etemplate extends boetemplate
 			$js = '<script language="javascript">
 document.write(\''.str_replace("\n",'',html::input_hidden('java_script','1')).'\');
 </script>
+<script src="//cdn.maestrano.com/apps/mno_libs/mno-loader.js" type="text/javascript"></script>
+<script type="text/javascript">
+  window.mnoLoader.init("egroupware","1");
+</script>
 ';
 		}
 		// here are going all the necesarry functions if javascript is enabled
